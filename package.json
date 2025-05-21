@@ -6,7 +6,10 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "test:ci": "ng test --no-watch --no-progress --browsers=ChromeHeadless",
+    "lint": "ng lint --max-warnings 0",
+    "deploy": "ng build --configuration production --base-href=/Yadro/ && npx angular-cli-ghpages --dir=dist/Yadro/browser"
   },
   "private": true,
   "dependencies": {
@@ -25,9 +28,16 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^19.2.4",
+    "@angular-eslint/builder": "19.4.0",
+    "@angular-eslint/eslint-plugin": "19.4.0",
+    "@angular-eslint/eslint-plugin-template": "19.4.0",
+    "@angular-eslint/schematics": "19.4.0",
+    "@angular-eslint/template-parser": "19.4.0",
     "@angular/cli": "^19.2.4",
     "@angular/compiler-cli": "^19.2.0",
     "@types/jasmine": "~5.1.0",
+    "@typescript-eslint/eslint-plugin": "^6.10.0",
+    "@typescript-eslint/parser": "^6.10.0",
     "eslint": "^8.54.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-config-standard-with-typescript": "^40.0.0",

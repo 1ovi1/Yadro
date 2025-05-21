@@ -1,0 +1,33 @@
+<div class="wrapper">
+  <nz-header>
+    <h1>Список пользователей</h1>
+    <button nz-button class="create-btn" [routerLink]="['/CreateUser']">Создать пользователя</button>
+  </nz-header>
+
+  <div class="users-container">
+    @if (users().length === 0) {
+      <div class="no-users">Пользователи не найдены</div>
+    } @else {
+      @for (user of users(); track user.id) {
+        <div class="user-card">
+          <div class="user-info" [routerLink]="['/UserInfo', user.id]">
+            <h3>{{ user.name }}</h3>
+            <p>{{ user.email }}</p>
+          </div>
+          <div class="user-actions">
+            <button class="edit-btn" [routerLink]="['/UpdateUser', user.id]">Редактировать</button>
+            <button class="delete-btn" (click)="invokeDeleteModal(user.id)">Удалить</button>
+          </div>
+        </div>
+      }
+    }
+  </div>
+
+  <nz-pagination
+    [nzPageIndex]="currentPage()"
+    [nzTotal]="totalItems()"
+    [nzPageSize]="pageSize()"
+    (nzPageIndexChange)="goToPage($event)"
+    [nzShowSizeChanger]="false"
+  />
+</div>
