@@ -34,7 +34,7 @@ jobs:
         run: npm run test:ci
 
       - name: Сборка
-        run: ng build:production
+        run: npm run build:production
 
       - name: Загрузка артефакта GitHub Pages
         uses: actions/upload-pages-artifact@v3
