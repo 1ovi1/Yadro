@@ -6,13 +6,15 @@ on:
   pull_request:
     branches: [ master ]
 
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
 jobs:
   build-and-test:
     name: Сборка и тестирование
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      pages: write
 
     steps:
     - uses: actions/checkout@v3
@@ -35,5 +37,14 @@ jobs:
     - name: Сборка
       run: npm run build:production
 
-    - name: Деплой на GitHub Pages
-      run: npm run deploy
+    - name: Артефакт
+      uses: actions/upload-pages-artifact@v1
+      with:
+        path: dist/Yadro
+
+  deploy:
+    needs: build-and-test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Деплой на GitHub Pages
+        uses: actions/deploy-pages@v1
