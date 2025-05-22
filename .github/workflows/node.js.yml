@@ -12,32 +12,43 @@ permissions:
   id-token: write
 
 jobs:
-  build-and-test:
-    name: Сборка и тестирование
+  build:
+    name: Сборка
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-    - name: Настройка Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '20'
-        cache: 'npm'
+      - name: Настройка Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+          cache: 'npm'
 
-    - name: Установка зависимостей
-      run: npm ci
+      - name: Установка зависимостей
+        run: npm ci
 
-    - name: Линтинг
-      run: npm run lint
+      - name: Линтинг
+        run: npm run lint
 
-    - name: Тесты
-      run: npm run test:ci
+      - name: Тесты
+        run: npm run test:ci
 
-    - name: Сборка
-      run: npm run build:production
+      - name: Сборка
+        run: ng build --configuration production --base-href=/Yadro/
 
-    - name: Сборка и деплой
-      run: npm run deploy
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Загрузка артефакта GitHub Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist/Yadro/browser
+
+  deploy:
+    name: Деплой
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Деплой на GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
