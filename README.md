@@ -1,6 +1,6 @@
 # YadroTest
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.4.
+Проект на Ангуляре 19.2.4 - тестовое задание 
 
 ## Development server
 

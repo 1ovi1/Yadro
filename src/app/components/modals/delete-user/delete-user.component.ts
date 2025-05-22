@@ -3,10 +3,15 @@ import {UserService} from '../../../services/user.service';
 import {NzMessageService} from 'ng-zorro-antd/message';
 import {Router} from '@angular/router';
 import {NZ_MODAL_DATA, NzModalRef} from 'ng-zorro-antd/modal';
+import {NzWaveDirective} from 'ng-zorro-antd/core/wave';
+import {NzSpinComponent} from 'ng-zorro-antd/spin';
 
 @Component({
   selector: 'yadro-delete-user',
-  imports: [],
+  imports: [
+    NzWaveDirective,
+    NzSpinComponent
+  ],
   templateUrl: './delete-user.component.html',
   standalone: true,
   styleUrl: './delete-user.component.scss'
@@ -16,16 +21,20 @@ export class DeleteUserComponent {
   private userService = inject(UserService)
   private message = inject(NzMessageService);
   private modalRef = inject(NzModalRef);
+  public deleting: boolean = false;
 
   userId = (inject(NZ_MODAL_DATA) as { userId: number }).userId;
 
   deleteUser() {
+    this.deleting = true;
     this.userService.deleteUser(this.userId).subscribe({
       next: () => {
+        this.deleting = false;
         this.message.success(`Пользователь ${this.userId} удалён`);
         this.modalRef.destroy();
       },
-      error: (error) => {
+      error: () => {
+        this.deleting = true;
         this.message.error('Не удалось удалить пользователя');
         this.modalRef.destroy();
       }

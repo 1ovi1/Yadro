@@ -95,11 +95,10 @@ body {
 
 .wrapper {
   width: 100%;
-  max-width: 1104px;
-  margin: 0 auto;
+  max-width: 1200px;
+  margin: auto;
   padding-left: 40px;
   padding-right: 40px;
-  background-color: var(--white);
 
   @media (max-width: 991px) {
     padding-left: 24px;

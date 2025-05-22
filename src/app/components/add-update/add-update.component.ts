@@ -8,6 +8,7 @@ import {NzInputModule} from 'ng-zorro-antd/input';
 import {NzButtonModule} from 'ng-zorro-antd/button';
 import {NzSpinModule} from 'ng-zorro-antd/spin';
 import {User} from '../../interfaces/user';
+import {NzMessageService} from 'ng-zorro-antd/message';
 
 @Component({
   selector: 'yadro-add-update',
@@ -27,6 +28,7 @@ export class AddUpdateComponent implements OnInit {
   private route = inject(ActivatedRoute);
   private router = inject(Router);
   private userService = inject(UserService);
+  private message = inject(NzMessageService);
 
   isEditMode = signal<boolean>(false);
   userId = signal<number | null>(null);
@@ -55,24 +57,21 @@ export class AddUpdateComponent implements OnInit {
       Validators.required,
       Validators.pattern(/^\+?[0-9()\-\s.]+(\s*x\s*[0-9]+)?$/)
     ]),
-    website: new FormControl('', [
-      Validators.required,
-      Validators.pattern(/^((https?:\/\/)?(www\.)?)?[a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9](\.[a-zA-Z]{2,})+$/)
-    ]),
+    website: new FormControl(''),
     address: new FormGroup({
-      street: new FormControl('', [Validators.required, Validators.maxLength(100)]),
-      suite: new FormControl('', [Validators.required, Validators.maxLength(50)]),
-      city: new FormControl('', [Validators.required, Validators.maxLength(50)]),
-      zipcode: new FormControl('', [Validators.required, Validators.pattern(/^[0-9-]+$/)]),
+      street: new FormControl(''),
+      suite: new FormControl(''),
+      city: new FormControl(''),
+      zipcode: new FormControl(''),
       geo: new FormGroup({
-        lat: new FormControl('', [Validators.required, Validators.pattern(/^-?[0-9]+(\.[0-9]+)?$/)]),
-        lng: new FormControl('', [Validators.required, Validators.pattern(/^-?[0-9]+(\.[0-9]+)?$/)])
+        lat: new FormControl(''),
+        lng: new FormControl('')
       })
     }),
     company: new FormGroup({
-      name: new FormControl('', [Validators.required, Validators.maxLength(100)]),
-      catchPhrase: new FormControl('', [Validators.required, Validators.maxLength(200)]),
-      bs: new FormControl('', [Validators.required, Validators.maxLength(100)])
+      name: new FormControl(''),
+      catchPhrase: new FormControl(''),
+      bs: new FormControl('')
     })
   });
 
@@ -131,6 +130,7 @@ export class AddUpdateComponent implements OnInit {
       this.userService.updateUser(id, userData).subscribe({
         next: () => {
           this.submitting.set(false);
+          this.message.success('Данные пользователя обновлены')
           void this.router.navigate(['/']);
         },
         error: (err) => {
@@ -144,6 +144,7 @@ export class AddUpdateComponent implements OnInit {
       this.userService.createUser(newUser).subscribe({
         next: () => {
           this.submitting.set(false);
+          this.message.success(`Пользователь ${newUser.name} создан`)
           void this.router.navigate(['/']);
         },
         error: (err) => {

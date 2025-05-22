@@ -1,9 +1,59 @@
-@if (user()) {
-  <div class="user-details">
-    <h2>{{ user()?.name }}</h2>
-    <p>Email: {{ user()?.email }}</p>
-    <p>Phone: {{ user()?.phone }}</p>
-  </div>
-} @else {
-  <p>Загрузка информации о пользователе...</p>
-}
+<div class="wrapper">
+  @if (user()) {
+    <div class="user-details">
+      <div class="user">
+        <h2>{{ user()?.name }}</h2>
+        <span class="user-username">{{ user()?.username }}</span>
+      </div>
+      <div class="contact-info">
+        <div class="info-block">
+          <p>
+            Email: <a href="mailto:{{ user()?.email }}">{{ user()?.email }}</a>
+          </p>
+        </div>
+
+        <div class="info-block">
+          <p>
+            Телефон: <a href="tel:{{ user()?.phone }}">{{ user()?.phone }}</a>
+          </p>
+        </div>
+        <div class="info-block">
+          <p>
+            Сайт: <a href="https://{{ user()?.website }}" target="_blank">{{ user()?.website }}</a>
+          </p>
+        </div>
+      </div>
+      <div class="additional-info">
+        @if (user()?.address) {
+          <div class="address-block">
+            <h3>Адрес</h3>
+            <p>
+              {{ user()?.address?.street }}, {{ user()?.address?.suite }}<br />
+              {{ user()?.address?.city }}, {{ user()?.address?.zipcode }}
+            </p>
+
+            @if (user()?.address?.geo) {
+              <p class="geo-coordinates">
+                Координаты: {{ user()?.address?.geo?.lat }} , {{ user()?.address?.geo?.lng }}
+              </p>
+            }
+          </div>
+        }
+
+        @if (user()?.company) {
+          <div class="company-block">
+            <h3>Компания</h3>
+            <p class="company-name">{{ user()?.company?.name }}</p>
+            <p class="company-bs">{{ user()?.company?.bs }}</p>
+            <p class="company-catchphrase">"{{ user()?.company?.catchPhrase }}"</p>
+          </div>
+        }
+      </div>
+    </div>
+  } @else {
+    <div class="loading-container">
+      <nz-spin />
+      <p>Загрузка информации о пользователе...</p>
+    </div>
+  }
+</div>

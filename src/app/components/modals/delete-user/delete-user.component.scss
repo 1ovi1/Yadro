@@ -1,0 +1,23 @@
+.actions{
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+}
+
+.actions >:first-child{
+  color: white;
+  background-color: var(--red);
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+.actions >:nth-child(2){
+  color: white;
+  border: none;
+  background-color: var(--green);
+  border-radius: 4px;
+  padding: 8px 16px;
+  cursor: pointer;
+}

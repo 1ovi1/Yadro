@@ -2,10 +2,13 @@ import {Component, inject, OnInit, signal} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {UserService} from '../../services/user.service';
 import {User} from '../../interfaces/user';
+import {NzSpinComponent} from 'ng-zorro-antd/spin';
 
 @Component({
   selector: 'yadro-info',
-  imports: [],
+  imports: [
+    NzSpinComponent
+  ],
   templateUrl: './info.component.html',
   standalone: true,
   styleUrl: './info.component.scss'
