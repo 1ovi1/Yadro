@@ -1,6 +1,9 @@
 <div class="wrapper">
   @if (user()) {
     <div class="user-details">
+      <div class="back-button-container">
+        <button class="back-button" (click)="goBack()"><nz-icon nzType="left" /> Назад</button>
+      </div>
       <div class="user">
         <h2>{{ user()?.name }}</h2>
         <span class="user-username">{{ user()?.username }}</span>

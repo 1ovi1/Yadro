@@ -4,8 +4,8 @@
   </div>
   @if (!deleting) {
     <div class="actions">
-      <button nz-button class="cancel" (click)="goBack()">Нет</button>
-      <button nz-button class="delete" (click)="deleteUser()">Да</button>
+      <button nz-button nzType="primary" class="cancel" (click)="goBack()">Нет</button>
+      <button nz-button nzType="primary" class="delete" (click)="deleteUser()">Да</button>
     </div>
   } @else {
     <nz-spin />

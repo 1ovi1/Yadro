@@ -57,22 +57,25 @@ export class AddUpdateComponent implements OnInit {
       Validators.required,
       Validators.pattern(/^\+?[0-9()\-\s.]+(\s*x\s*[0-9]+)?$/)
     ]),
-    website: new FormControl(''),
-    address: new FormGroup({
-      street: new FormControl(''),
-      suite: new FormControl(''),
-      city: new FormControl(''),
-      zipcode: new FormControl(''),
-      geo: new FormGroup({
-        lat: new FormControl(''),
-        lng: new FormControl('')
-      })
-    }),
-    company: new FormGroup({
-      name: new FormControl(''),
-      catchPhrase: new FormControl(''),
-      bs: new FormControl('')
-    })
+
+    //Реализовал полное заполнение, но оно здесь не нужно)
+
+    // website: new FormControl(''),
+    // address: new FormGroup({
+    //   street: new FormControl(''),
+    //   suite: new FormControl(''),
+    //   city: new FormControl(''),
+    //   zipcode: new FormControl(''),
+    //   geo: new FormGroup({
+    //     lat: new FormControl(''),
+    //     lng: new FormControl('')
+    //   })
+    // }),
+    // company: new FormGroup({
+    //   name: new FormControl(''),
+    //   catchPhrase: new FormControl(''),
+    //   bs: new FormControl('')
+    // })
   });
 
   ngOnInit() {
@@ -93,9 +96,11 @@ export class AddUpdateComponent implements OnInit {
           username: user.username,
           email: user.email,
           phone: user.phone,
-          website: user.website,
-          address: user.address,
-          company: user.company
+
+          //Реализовал полное заполнение, но оно здесь не нужно)
+          // website: user.website,
+          // address: user.address,
+          // company: user.company
         });
         this.loading.set(false);
       },

@@ -8,6 +8,7 @@ import {NzModalModule, NzModalService} from 'ng-zorro-antd/modal';
 import {DeleteUserComponent} from '../modals/delete-user/delete-user.component';
 import {NzHeaderComponent} from 'ng-zorro-antd/layout';
 import {NzButtonComponent} from 'ng-zorro-antd/button';
+import {NzIconDirective, NzIconModule} from 'ng-zorro-antd/icon';
 
 @Component({
   selector: 'yadro-main',
@@ -17,7 +18,8 @@ import {NzButtonComponent} from 'ng-zorro-antd/button';
     NzPaginationModule,
     NzModalModule,
     NzHeaderComponent,
-    NzButtonComponent
+    NzButtonComponent,
+    NzIconModule
   ],
   templateUrl: './main.component.html',
   standalone: true,
