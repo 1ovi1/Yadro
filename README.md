@@ -1,59 +1,63 @@
 # YadroTest
 
-Проект на Ангуляре 19.2.4 - тестовое задание 
+Проект на Ангуляре 19.2.4 - тестовое задание
 
-## Development server
+#### Выполнено:
+  - Основное задание(компоненты, маршрутизация, обращение к API)
+    - использован Angular 19 и SCSS для стилей
+    - компоненты: основной, создания-редактирования, информации
+    - сервис для обращения к API
+    - в компоненте создания-редактирования реализована форма и валидация полей(не только email)
+    - маршрутизация(идентификатор пользователя берётся из пути)
+  - Дополнительно:
+    - линтёр для тестов и чистоты кода
+    - ng-zorro для стилей
+    - базовые unit-тесты и их использование в GitHub Actions
+    - [деплой на GitHub Pages](https://1ovi1.github.io/Yadro/)
+    - пагинация: запрос через сервис/отображение через [nz-pagination](https://ng.ant.design/components/pagination/en#ng-content)
 
-To start a local development server, run:
+## Запуск
+
+### Установка зависимостей
+
+```sh
+npm i
+```
+
+### Запуск в режиме разработки
 
 ```bash
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+### Сборка для прода
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
+```shell
+npm run build:production
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+### Тесты
 
-```bash
-ng generate --help
+```shell
+npm run test
+# или для деплоя
+npm run test:ci
 ```
 
-## Building
+### Проверка линтёром
 
-To build the project run:
-
-```bash
-ng build
+```shell
+npm run lint
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+### Деплой
 
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
+```shell
+npm run deploy
 ```
 
-## Running end-to-end tests
+## Личные комментарии
 
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- eslint настроил для удобства
+- с деплоем и actions разбирался впервые(обычно они были настроены и работал я, преимущественно, на гитлабе)
+- тесты компонентов тоже впервые трогал, обычно в проекте они просто были отключены

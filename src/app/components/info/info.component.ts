@@ -3,13 +3,13 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {UserService} from '../../services/user.service';
 import {User} from '../../interfaces/user';
 import {NzSpinComponent} from 'ng-zorro-antd/spin';
-import {NzIconDirective} from 'ng-zorro-antd/icon';
+import {NzIconModule} from 'ng-zorro-antd/icon';
 
 @Component({
   selector: 'yadro-info',
   imports: [
     NzSpinComponent,
-    NzIconDirective
+    NzIconModule
   ],
   templateUrl: './info.component.html',
   standalone: true,
@@ -34,6 +34,6 @@ export class InfoComponent implements OnInit{
   }
 
   goBack() {
-    this.router.navigate(['/']);
+    void this.router.navigate(['/']);
   }
 }

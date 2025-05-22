@@ -8,7 +8,8 @@ import {NzModalModule, NzModalService} from 'ng-zorro-antd/modal';
 import {DeleteUserComponent} from '../modals/delete-user/delete-user.component';
 import {NzHeaderComponent} from 'ng-zorro-antd/layout';
 import {NzButtonComponent} from 'ng-zorro-antd/button';
-import {NzIconDirective, NzIconModule} from 'ng-zorro-antd/icon';
+import {NzIconModule} from 'ng-zorro-antd/icon';
+import {finalize} from 'rxjs';
 
 @Component({
   selector: 'yadro-main',
@@ -42,13 +43,14 @@ export class MainComponent implements OnInit {
 
   loadUsers() {
     this.loading.set(true);
-    this.userService.getUsersWithPagination(this.currentPage(), this.pageSize())
+    this.userService
+      .getUsersWithPagination(this.currentPage(), this.pageSize())
+      .pipe(finalize(() => this.loading.set(false)))
       .subscribe({
         next: (response) => {
           this.users.set(response.users);
           this.totalPages.set(response.totalPages);
           this.totalItems.set(response.totalItems);
-          this.loading.set(false);
         },
         error: () => this.loading.set(false)
       });
