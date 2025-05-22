@@ -37,14 +37,11 @@ jobs:
     - name: Сборка
       run: npm run build:production
 
-    - name: Артефакт
-      uses: actions/upload-pages-artifact@v3
-      with:
-        path: dist/Yadro
-
   deploy:
     needs: build-and-test
     runs-on: ubuntu-latest
     steps:
       - name: Деплой на GitHub Pages
-        uses: actions/deploy-pages@v3
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
