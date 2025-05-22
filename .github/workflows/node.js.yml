@@ -38,7 +38,7 @@ jobs:
       run: npm run build:production
 
     - name: Артефакт
-      uses: actions/upload-pages-artifact@v1
+      uses: actions/upload-pages-artifact@v3
       with:
         path: dist/Yadro
 
@@ -47,4 +47,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Деплой на GitHub Pages
-        uses: actions/deploy-pages@v1
+        uses: actions/deploy-pages@v3
